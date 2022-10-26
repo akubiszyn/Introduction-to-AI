@@ -15,7 +15,7 @@ def get_function(n, alpha):
 
     return function
 
-def generate_plot(fun, steps, time, alpha):
+def generate_plot(steps, time, alpha):
     keys1 = [ i for i in range(len(steps))]
     values1 = [i for i in steps]
     label_legend = 'alpha =' + str(10**alpha) + ', time: ' + str(round(time, 5))
@@ -33,15 +33,15 @@ def get_data(alpha):
     steps = gradient_algorithm(
         fun,
         np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], dtype=float),
-        0.5,
-        0.7,
-        5)
+        0.1,
+        0.1,
+        10)
     stop = time.process_time()
     if gc_old: gc.enable()
     algorithm_time = stop - start
-    return fun, steps, algorithm_time
+    return steps, algorithm_time
 
 for i in range(3):
     data = get_data(i)
-    generate_plot(data[0], data[1], data[2], i)
+    generate_plot(data[0], data[1], i)
 plt.show()
