@@ -1,17 +1,25 @@
 import autograd.numpy as np   # Thinly-wrapped version of Numpy
 from autograd import grad
 
-def taylor_sine(x):  # Taylor approximation to sine function
-    ans = currterm = x
-    i = 0
-    while np.abs(currterm) > 0.001:
-        print(np.abs(currterm))
-        currterm = -currterm * x**2 / ((2 * i + 3) * (2 * i + 2))
-        ans = ans + currterm
-        i += 1
-    print(ans)
-    return ans
+# def fun(x):
+#     a = np.zeros((2))
+#     for i in range(2):
+#         a[i] = 1**((i - 1)/ 9)
+#     y =  np.sum((x**2) * a)
+#     return y
 
-grad_sine = grad(taylor_sine)
 
-print ("Gradient of sin(pi) is", grad_sine(np.pi))
+
+# x0 = np.array([1, 2], dtype=float)
+
+# y = fun(x0)
+
+# for i in range(len(x0)):
+#     gradient_i= grad(fun, 0)
+#     b = gradient_i(x0)
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+c = a * b
+print(c)
+
