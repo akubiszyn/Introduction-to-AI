@@ -7,8 +7,7 @@ def rating(fun, population, population_number):
         o[i] = fun(population[i])
     return o
 
-def find_best(population, fun, population_number):
-    o = rating(fun, population, population_number)
+def find_best(population, o):
     o_min = min(o)
     index = np.where(o == o_min)[0][0]
     x_min = population[index]
@@ -21,8 +20,8 @@ def initiation(population_number, dimension, domain):
 def reproduction(Pt, o, population_number):
     R = np.zeros(population_number)
     for i in range(population_number):
-        tournament = random.choices(Pt, 2)
-        R[i] = min(tournament[0], tournament[1])
+        tournament = random.choices(range(population_number), k=2)
+        R[i] = min(o[tournament[0]], o[tournament[1]])
     return R
 
 def gen_operation(population, sigma, population_number):
@@ -42,15 +41,18 @@ def elit_succesion(Pt, M, k, fun, population_number):
 def evolutionary_algorithm(dimension, fun, tmax, population_number, sigma, domain):
     t = 0
     P0 = initiation(population_number, dimension, domain)
-    x_min, o_min = find_best(P0, fun, population_number)
+    o = rating(fun, P0, population_number)
+    x_min, o_min = find_best(P0, o)
     Pt = P0
     while(t < tmax):
         R = reproduction(Pt, o, population_number)
         M = gen_operation(R ,sigma, population_number)
-        xt, ot = find_best(M, fun, population_number)
+        o = rating(fun, M, population_number)
+        xt, ot = find_best(M, o)
         if ot <= o_min:
             o_min = ot
             x_min = xt
         Pt, o = elit_succesion(Pt, M, 1, fun, population_number)
         t += 1
+    return x_min, o_min
     
