@@ -3,6 +3,9 @@ from matplotlib import pyplot as plt
 from gradient_descent import gradient_algorithm
 import time
 import gc
+import sys
+sys.path.insert(0, '/home/alicja/Studia/3sem/WSI/wsi/cec2017-py/cec2017')
+from functions import f1, f9
 
 
 def get_function(n, alpha):
@@ -14,12 +17,13 @@ def get_function(n, alpha):
         return y
 
     return function
+# 'alpha =' + str(10**alpha) + ',
 
 def generate_plot(steps, time, alpha):
     keys1 = [ i for i in range(len(steps))]
     values1 = [i for i in steps]
-    label_legend = 'alpha =' + str(10**alpha) + ', time: ' + str(round(time, 5))
-    label_legend += ', iterations: ' + str(len(steps))
+    label_legend =  'time: ' + str(round(time, 5))
+    label_legend += ', iterations: ' + str(len(steps)) + ', value:' + str(round(steps[-1], 5))
     plt.plot(keys1, values1, '-o', label=label_legend)
     plt.legend()
     plt.yscale('symlog')
@@ -31,17 +35,17 @@ def get_data(alpha):
     fun = get_function(10, 10**alpha)
     start = time.process_time()
     steps = gradient_algorithm(
-        fun,
+        f1,
         np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], dtype=float),
         0.1,
         0.1,
-        10)
+        300)
     stop = time.process_time()
     if gc_old: gc.enable()
     algorithm_time = stop - start
     return steps, algorithm_time
 
-for i in range(3):
+for i in range(1):
     data = get_data(i)
     generate_plot(data[0], data[1], i)
 plt.show()

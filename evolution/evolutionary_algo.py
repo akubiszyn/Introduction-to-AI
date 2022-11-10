@@ -42,6 +42,7 @@ def elit_succesion(Pt, M, k, o):
     return M
 
 def evolutionary_algorithm(dimension, fun, tmax, population_number, sigma, domain):
+    values = []
     t = 0
     P0 = initiation(population_number, dimension, domain)
     o = rating(fun, P0, population_number)
@@ -57,5 +58,6 @@ def evolutionary_algorithm(dimension, fun, tmax, population_number, sigma, domai
             x_min = xt
         Pt = elit_succesion(Pt, M, 1, o)
         t += 1
-    return x_min, o_min
+        values.append((x_min, o_min))
+    return values
     
