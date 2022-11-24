@@ -41,7 +41,7 @@ def get_data(alpha):
     algorithm_time = stop - start
     return steps, algorithm_time
 
-for i in range(3):
+for i in range(1):
     data = get_data(i)
-    generate_plot(data[0], data[1], i)
+    generate_plot(data[0], data[1], 0)
 plt.show()
