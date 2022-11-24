@@ -85,11 +85,11 @@ def minimax(depth, player, state):
     win = state.check_if_terminal()
     if state.terminal == 1:
         if win == player.type:
-            return player.type * depth * 1000
+            return player.type * (depth+1) * 1000
         elif win == 0:
             return heuristic(state)
         else:
-            return player.type * (-1) * depth * 1000
+            return player.type * (-1) * (depth+1) * 1000
 
     elif depth == 0:
         return heuristic(state)

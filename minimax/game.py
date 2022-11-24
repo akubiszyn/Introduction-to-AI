@@ -29,12 +29,12 @@ class Game:
         self.player = Player(self.current_move)
         
 
-    def game(self):
+    def game(self, depth1, depth2):
         while(self.state.terminal == 0):
             if self.player.type == 1:
-                minmax = minimax(5, self.player, self.state)
+                minmax = minimax(depth1, self.player, self.state)
             else:
-                minmax = minimax(3, self.player, self.state)
+                minmax = minimax(depth2, self.player, self.state)
             if self.state.terminal == 1:
                 self.print_comments(minmax)
                 return
@@ -47,5 +47,5 @@ class Game:
 
 
 game = Game()
-game.game()
+game.game(4, 4)
 
